@@ -1,0 +1,386 @@
+/* =====================================================
+   FitZone — Folha de estilos
+   Cores: preto, cinza escuro, branco e verde de destaque
+   ===================================================== */
+
+/* ---------- Variáveis de cor (fáceis de mudar) ---------- */
+:root {
+  --preto: #0d0d0d;
+  --cinza-escuro: #1a1a1a;
+  --cinza-medio: #262626;
+  --cinza-borda: #333333;
+  --branco: #ffffff;
+  --texto-suave: #b5b5b5;
+  --verde: #22c55e;
+  --verde-escuro: #16a34a;
+  --vermelho: #ef4444;
+  --raio: 14px;
+}
+
+/* ---------- Reset básico ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--preto);
+  color: var(--branco);
+  display: flex;
+  min-height: 100vh;
+}
+
+h1 { font-size: 1.9rem; margin-bottom: 4px; }
+h2 { font-size: 2rem; }
+h3 { margin-bottom: 12px; font-size: 1.1rem; }
+
+label {
+  display: block;
+  margin: 12px 0 6px;
+  color: var(--texto-suave);
+  font-size: 0.9rem;
+}
+
+/* ---------- Menu lateral ---------- */
+.sidebar {
+  width: 240px;
+  background: var(--cinza-escuro);
+  border-right: 1px solid var(--cinza-borda);
+  padding: 24px 16px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 20;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 28px;
+  padding-left: 8px;
+}
+.logo span { color: var(--verde); }
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.menu-item {
+  background: transparent;
+  color: var(--texto-suave);
+  border: none;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.menu-item:hover {
+  background: var(--cinza-medio);
+  color: var(--branco);
+}
+.menu-item.active {
+  background: var(--verde);
+  color: var(--preto);
+  font-weight: 700;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  font-size: 0.75rem;
+  color: var(--texto-suave);
+  padding-left: 8px;
+}
+
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 30;
+  background: var(--verde);
+  color: var(--preto);
+  border: none;
+  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+/* ---------- Conteúdo principal ---------- */
+.content {
+  margin-left: 240px;
+  padding: 32px;
+  width: calc(100% - 240px);
+}
+
+.page { display: none; }
+.page.active { display: block; animation: aparecer 0.3s ease; }
+
+@keyframes aparecer {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.subtitulo { color: var(--texto-suave); margin-bottom: 24px; }
+.destaque { color: var(--verde); }
+.pequeno { font-size: 0.85rem; color: var(--texto-suave); margin-top: 8px; }
+.espaco-topo { margin-top: 24px; }
+
+/* ---------- Grades ---------- */
+.grid { display: grid; gap: 16px; margin-bottom: 16px; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-dias { grid-template-columns: repeat(4, 1fr); }
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--cinza-escuro);
+  border: 1px solid var(--cinza-borda);
+  border-radius: var(--raio);
+  padding: 20px;
+  margin-bottom: 0;
+  transition: 0.2s;
+}
+.card:hover {
+  border-color: var(--verde);
+  transform: translateY(-2px);
+}
+
+.stat { text-align: center; }
+.stat-icon { font-size: 1.8rem; }
+.stat h2 { color: var(--verde); margin: 6px 0 2px; }
+.stat p { color: var(--texto-suave); font-size: 0.9rem; }
+
+/* ---------- Campos e botões ---------- */
+.campo {
+  width: 100%;
+  background: var(--cinza-medio);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 10px;
+  color: var(--branco);
+  padding: 11px 14px;
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+.campo:focus {
+  outline: none;
+  border-color: var(--verde);
+}
+
+.btn {
+  background: var(--verde);
+  color: var(--preto);
+  border: none;
+  border-radius: 10px;
+  padding: 11px 20px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: 0.2s;
+}
+.btn:hover {
+  background: var(--verde-escuro);
+  transform: translateY(-2px);
+}
+.btn-cinza { background: var(--cinza-medio); color: var(--branco); }
+.btn-cinza:hover { background: var(--cinza-borda); }
+.btn-contorno {
+  background: transparent;
+  color: var(--verde);
+  border: 1px solid var(--verde);
+}
+.btn-contorno:hover { background: var(--verde); color: var(--preto); }
+.btn-pequeno { padding: 6px 12px; font-size: 0.85rem; }
+.btn-perigo { background: var(--vermelho); color: var(--branco); }
+
+.botoes { display: flex; gap: 10px; flex-wrap: wrap; }
+.botoes.centro { justify-content: center; }
+
+/* ---------- Barra de progresso ---------- */
+.barra {
+  background: var(--cinza-medio);
+  border-radius: 20px;
+  height: 14px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.barra-preenchida {
+  background: var(--verde);
+  height: 100%;
+  width: 0;
+  border-radius: 20px;
+  transition: width 0.5s;
+}
+.objetivo { font-size: 1.15rem; color: var(--verde); }
+
+/* ---------- Resumo da semana (dashboard) ---------- */
+.semana-resumo { display: flex; gap: 8px; justify-content: space-between; }
+.dia-bolinha {
+  flex: 1;
+  text-align: center;
+  padding: 10px 0;
+  border-radius: 10px;
+  background: var(--cinza-medio);
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+}
+.dia-bolinha.feito { background: var(--verde); color: var(--preto); font-weight: 700; }
+.dia-bolinha.hoje { outline: 2px solid var(--branco); }
+
+/* ---------- Biblioteca ---------- */
+.filtros { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 20px; }
+.filtro {
+  background: var(--cinza-medio);
+  color: var(--branco);
+  border: 1px solid var(--cinza-borda);
+  border-radius: 20px;
+  padding: 7px 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.filtro:hover { border-color: var(--verde); }
+.filtro.ativo { background: var(--verde); color: var(--preto); font-weight: 700; }
+
+.exercicio h3 { margin-bottom: 6px; }
+.tag {
+  display: inline-block;
+  background: rgba(34, 197, 94, 0.15);
+  color: var(--verde);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+}
+.exercicio p { color: var(--texto-suave); font-size: 0.9rem; margin-bottom: 8px; }
+.exercicio .info { color: var(--branco); font-weight: 600; }
+
+/* ---------- Montagem de treino ---------- */
+.lista-escolha { max-height: 420px; overflow-y: auto; }
+.item-escolha {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--cinza-medio);
+  margin-bottom: 8px;
+  gap: 8px;
+}
+.item-escolha small { color: var(--texto-suave); display: block; }
+
+.treino-atual { margin: 12px 0; min-height: 60px; }
+.item-treino {
+  background: var(--cinza-medio);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+}
+.item-treino .linha { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.item-treino .campos { display: flex; gap: 10px; margin-top: 8px; }
+.item-treino .campos div { flex: 1; }
+.item-treino .campos label { margin: 0 0 3px; font-size: 0.75rem; }
+.item-treino .campos input {
+  width: 100%;
+  background: var(--cinza-escuro);
+  border: 1px solid var(--cinza-borda);
+  color: var(--branco);
+  border-radius: 8px;
+  padding: 6px 8px;
+}
+.vazio { color: var(--texto-suave); font-style: italic; padding: 10px 0; }
+/* Avisos dentro de uma grade ocupam a linha inteira */
+.grid > .vazio { grid-column: 1 / -1; }
+
+.treino-salvo {
+  background: var(--cinza-medio);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.treino-salvo ul { margin: 8px 0 8px 20px; color: var(--texto-suave); font-size: 0.9rem; }
+
+/* ---------- Cronograma ---------- */
+.dia-card h3 { color: var(--verde); }
+.dia-card.hoje { border-color: var(--verde); }
+.dia-card select { margin-bottom: 8px; }
+.dia-card .resumo { color: var(--texto-suave); font-size: 0.85rem; min-height: 20px; }
+
+/* ---------- Cronômetro ---------- */
+.cronometro-card { text-align: center; max-width: 520px; margin: 0 auto; }
+.tempo {
+  font-size: 5rem;
+  font-weight: 800;
+  color: var(--verde);
+  font-variant-numeric: tabular-nums;
+  margin: 10px 0 16px;
+}
+.tempo.acabou { color: var(--vermelho); animation: piscar 0.6s infinite; }
+@keyframes piscar { 50% { opacity: 0.3; } }
+
+/* ---------- Evolução ---------- */
+.grafico {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 8px;
+  height: 180px;
+  padding-top: 10px;
+}
+.coluna { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; }
+.coluna .valor { font-size: 0.8rem; margin-bottom: 4px; }
+.coluna .barra-v {
+  width: 100%;
+  background: var(--verde);
+  border-radius: 8px 8px 0 0;
+  min-height: 4px;
+  transition: height 0.5s;
+}
+.coluna .rotulo { font-size: 0.75rem; color: var(--texto-suave); margin-top: 6px; }
+
+.historico-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--cinza-medio);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+}
+.historico-item span:last-child { color: var(--texto-suave); }
+
+/* ---------- Perfil / IMC ---------- */
+.imc-card { text-align: center; }
+.imc-valor { font-size: 4rem; font-weight: 800; color: var(--verde); }
+.imc-classe { font-size: 1.2rem; margin-bottom: 12px; }
+
+/* ---------- Responsivo (celular e tablet) ---------- */
+@media (max-width: 1000px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .grid-dias { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 800px) {
+  .menu-toggle { display: block; }
+  .sidebar { transform: translateX(-100%); transition: 0.3s; }
+  .sidebar.aberto { transform: translateX(0); }
+  .content { margin-left: 0; width: 100%; padding: 70px 16px 24px; }
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .tempo { font-size: 3.5rem; }
+  h1 { font-size: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+  .grid-4, .grid-dias { grid-template-columns: 1fr; }
+}

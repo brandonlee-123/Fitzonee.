@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitZone — Treinos e Evolução</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ MENU LATERAL ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="logo">💪 Fit<span>Zone</span></div>
+
+    <nav class="menu">
+      <button class="menu-item active" data-page="dashboard">🏠 Dashboard</button>
+      <button class="menu-item" data-page="biblioteca">📚 Exercícios</button>
+      <button class="menu-item" data-page="treinos">🏋️ Montar Treino</button>
+      <button class="menu-item" data-page="cronograma">📅 Cronograma</button>
+      <button class="menu-item" data-page="cronometro">⏱️ Cronômetro</button>
+      <button class="menu-item" data-page="evolucao">📈 Evolução</button>
+      <button class="menu-item" data-page="perfil">👤 Perfil</button>
+    </nav>
+
+    <p class="sidebar-footer">Projeto acadêmico<br>Engenharia de Software</p>
+  </aside>
+
+  <!-- Botão do menu no celular -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
+
+  <!-- ============ CONTEÚDO ============ -->
+  <main class="content">
+
+    <!-- ---------- DASHBOARD ---------- -->
+    <section class="page active" id="page-dashboard">
+      <h1>Olá, <span class="destaque" id="dashNome">Atleta</span>! 👋</h1>
+      <p class="subtitulo">Bem-vindo ao FitZone. Vamos treinar hoje?</p>
+
+      <div class="grid grid-4">
+        <div class="card stat">
+          <span class="stat-icon">🏆</span>
+          <h2 id="dashTotalTreinos">0</h2>
+          <p>Treinos realizados</p>
+        </div>
+        <div class="card stat">
+          <span class="stat-icon">📆</span>
+          <h2 id="dashSemana">0</h2>
+          <p>Treinos esta semana</p>
+        </div>
+        <div class="card stat">
+          <span class="stat-icon">💾</span>
+          <h2 id="dashTreinosSalvos">0</h2>
+          <p>Treinos salvos</p>
+        </div>
+        <div class="card stat">
+          <span class="stat-icon">⚖️</span>
+          <h2 id="dashImc">--</h2>
+          <p id="dashImcTexto">IMC não calculado</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Meta semanal</h3>
+          <p id="dashMetaTexto">0 de 4 treinos</p>
+          <div class="barra"><div class="barra-preenchida" id="dashBarra"></div></div>
+          <p class="pequeno" id="dashBarraPercent">0%</p>
+        </div>
+
+        <div class="card">
+          <h3>Objetivo pessoal</h3>
+          <p id="dashObjetivo" class="objetivo">Defina seu objetivo no perfil.</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Resumo da semana</h3>
+          <div class="semana-resumo" id="dashSemanaResumo"></div>
+        </div>
+
+        <div class="card">
+          <h3>Treino de hoje</h3>
+          <div id="dashHoje"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ---------- BIBLIOTECA ---------- -->
+    <section class="page" id="page-biblioteca">
+      <h1>Biblioteca de exercícios</h1>
+      <p class="subtitulo">Pesquise ou filtre por grupo muscular.</p>
+
+      <input type="text" id="buscaExercicio" class="campo" placeholder="🔍 Pesquisar exercício...">
+      <div class="filtros" id="filtrosGrupos"></div>
+
+      <div class="grid grid-3" id="listaExercicios"></div>
+    </section>
+
+    <!-- ---------- MONTAR TREINO ---------- -->
+    <section class="page" id="page-treinos">
+      <h1>Montar treino</h1>
+      <p class="subtitulo">Escolha exercícios, defina séries e repetições e salve.</p>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>1. Escolha os exercícios</h3>
+          <input type="text" id="buscaTreino" class="campo" placeholder="🔍 Buscar exercício...">
+          <div class="lista-escolha" id="listaEscolha"></div>
+        </div>
+
+        <div class="card">
+          <h3>2. Seu treino</h3>
+          <label for="nomeTreino">Nome do treino</label>
+          <input type="text" id="nomeTreino" class="campo" placeholder="Ex.: Treino A - Peito e Tríceps">
+
+          <div id="treinoAtual" class="treino-atual"></div>
+
+          <div class="botoes">
+            <button class="btn" id="btnSalvarTreino">💾 Salvar treino</button>
+            <button class="btn btn-cinza" id="btnLimparTreino">Limpar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Treinos salvos</h3>
+        <div id="treinosSalvos"></div>
+      </div>
+    </section>
+
+    <!-- ---------- CRONOGRAMA ---------- -->
+    <section class="page" id="page-cronograma">
+      <h1>Cronograma semanal</h1>
+      <p class="subtitulo">Escolha qual treino fará em cada dia da semana.</p>
+      <div class="grid grid-dias" id="gridCronograma"></div>
+    </section>
+
+    <!-- ---------- CRONÔMETRO ---------- -->
+    <section class="page" id="page-cronometro">
+      <h1>Cronômetro de descanso</h1>
+      <p class="subtitulo">Controle o descanso entre as séries.</p>
+
+      <div class="card cronometro-card">
+        <div class="tempo" id="tempoCronometro">00:00</div>
+        <div class="botoes centro">
+          <button class="btn" id="btnIniciar">▶ Iniciar</button>
+          <button class="btn btn-cinza" id="btnPausar">⏸ Pausar</button>
+          <button class="btn btn-cinza" id="btnZerar">⏹ Zerar</button>
+        </div>
+
+        <p class="pequeno">Atalhos de descanso (contagem regressiva):</p>
+        <div class="botoes centro">
+          <button class="btn btn-pequeno btn-contorno" data-descanso="30">30s</button>
+          <button class="btn btn-pequeno btn-contorno" data-descanso="60">60s</button>
+          <button class="btn btn-pequeno btn-contorno" data-descanso="90">90s</button>
+          <button class="btn btn-pequeno btn-contorno" data-descanso="120">2min</button>
+        </div>
+        <p class="pequeno" id="msgCronometro"></p>
+      </div>
+    </section>
+
+    <!-- ---------- EVOLUÇÃO ---------- -->
+    <section class="page" id="page-evolucao">
+      <h1>Evolução</h1>
+      <p class="subtitulo">Acompanhe seu progresso.</p>
+
+      <div class="grid grid-3">
+        <div class="card stat">
+          <span class="stat-icon">🏆</span>
+          <h2 id="evoTotal">0</h2>
+          <p>Treinos realizados</p>
+        </div>
+        <div class="card stat">
+          <span class="stat-icon">🎯</span>
+          <h2 id="evoMeta">4</h2>
+          <p>Meta por semana</p>
+        </div>
+        <div class="card stat">
+          <span class="stat-icon">📆</span>
+          <h2 id="evoSemana">0</h2>
+          <p>Feitos esta semana</p>
+        </div>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Registrar treino realizado</h3>
+          <label for="selTreinoFeito">Treino</label>
+          <select id="selTreinoFeito" class="campo"></select>
+          <button class="btn" id="btnRegistrar">✔ Registrar treino de hoje</button>
+          <p class="pequeno" id="msgRegistro"></p>
+
+          <h3 class="espaco-topo">Meta semanal</h3>
+          <label for="inputMeta">Treinos por semana</label>
+          <input type="number" id="inputMeta" class="campo" min="1" max="7" value="4">
+          <button class="btn btn-cinza" id="btnSalvarMeta">Salvar meta</button>
+        </div>
+
+        <div class="card">
+          <h3>Treinos nos últimos 7 dias</h3>
+          <div class="grafico" id="graficoSemana"></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Histórico de atividades</h3>
+        <div id="historico"></div>
+        <button class="btn btn-cinza btn-pequeno" id="btnLimparHistorico">Limpar histórico</button>
+      </div>
+    </section>
+
+    <!-- ---------- PERFIL ---------- -->
+    <section class="page" id="page-perfil">
+      <h1>Perfil do usuário</h1>
+      <p class="subtitulo">Cadastre ou edite seus dados.</p>
+
+      <div class="grid grid-2">
+        <form class="card" id="formPerfil">
+          <label for="perfilNome">Nome</label>
+          <input type="text" id="perfilNome" class="campo" placeholder="Seu nome" required>
+
+          <label for="perfilIdade">Idade</label>
+          <input type="number" id="perfilIdade" class="campo" min="10" max="100" placeholder="Anos">
+
+          <label for="perfilPeso">Peso (kg)</label>
+          <input type="number" id="perfilPeso" class="campo" min="20" max="300" step="0.1" placeholder="Ex.: 70.5">
+
+          <label for="perfilAltura">Altura (cm)</label>
+          <input type="number" id="perfilAltura" class="campo" min="100" max="250" placeholder="Ex.: 175">
+
+          <label for="perfilObjetivo">Objetivo pessoal</label>
+          <input type="text" id="perfilObjetivo" class="campo" placeholder="Ex.: Ganhar massa muscular">
+
+          <button type="submit" class="btn">💾 Salvar perfil</button>
+          <p class="pequeno" id="msgPerfil"></p>
+        </form>
+
+        <div class="card imc-card">
+          <h3>Seu IMC</h3>
+          <div class="imc-valor" id="imcValor">--</div>
+          <p class="imc-classe" id="imcClasse">Preencha peso e altura</p>
+          <p class="pequeno">IMC = peso ÷ (altura em metros)². É calculado automaticamente enquanto você digita.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
